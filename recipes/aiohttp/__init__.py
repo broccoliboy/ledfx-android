@@ -15,9 +15,9 @@ class AIOHTTPRecipe(CppCompiledComponentsPythonRecipe):  # type: ignore # pylint
         env['LDFLAGS'] += ' -lc++_shared'
         return env
 
-    python_depends = [        
+    python_depends = [
         'aiohappyeyeballs >= 2.3.0',
-        'aiosignal >= 1.1.2',
+        'aiosignal >=1.1.2,<1.4',
         'async-timeout >= 4.0, <6.0 ; python_version<"3.11"',
         'attrs >= 17.3.0',
         'frozenlist >= 1.1.1',
