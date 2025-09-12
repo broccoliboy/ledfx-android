@@ -22,6 +22,7 @@ class LedFxRecipe(PyProjectRecipe):
         'pillow',
         'samplerate',
         'requests',
+        'netifaces'
     ]
     
     python_depends = [
