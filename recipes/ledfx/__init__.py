@@ -22,7 +22,8 @@ class LedFxRecipe(PyProjectRecipe):
         'pillow',
         'samplerate',
         'requests',
-        'netifaces'
+        'netifaces',
+        'uvloop'
     ]
     
     python_depends = [
@@ -35,13 +36,13 @@ class LedFxRecipe(PyProjectRecipe):
         'aiohttp-cors>=0.8.1,<1',
         'voluptuous>=0.14.1,<1',
         'paho-mqtt>=1.6.1,<2',
-        'psutil>=5.9.7,<6',
         'pyserial>=3.5,<4',
         'icmplib>=3.0.4,<4',
         'certifi>=2025.4.26,<2026',
         'python-dotenv>=1.1.0,<2',
         'vnoise>=0.1.0,<1',
         'webcolors>=24,<25',
+        'packaging>=21,<22'
     ]
 
 
