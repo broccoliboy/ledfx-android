@@ -77,7 +77,7 @@ def validate_permissions():
         time.sleep(1)  # give the toast time to show
         
         # Shut down app
-        raise RuntimeError('Required permissions not granted')
+        # raise RuntimeError('Required permissions not granted')
     
 
 if __name__ == '__main__':
