@@ -14,6 +14,9 @@ from ports import LEDFX_PORT_LEANBACK, WEBVIEW_PORT
 
 def start_ledfx():
     
+    os.name = 'posix'  # Force os.name to 'posix' for compatibility
+    sys.platform = 'linux'  # Force sys.platform to 'linux' for compatibility
+    
     from ledfx.__main__ import main as ledfx_main
     from ledfx.config import CONFIG_DIRECTORY
         
