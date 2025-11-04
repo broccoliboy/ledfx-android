@@ -3,7 +3,7 @@ from pythonforandroid.recipe import CppCompiledComponentsPythonRecipe, CythonRec
 
 
 class AIOHTTPRecipe(CppCompiledComponentsPythonRecipe):  # type: ignore # pylint: disable=R0903
-    version = "3.11.14"
+    version = "3.13.2"
     url = "https://pypi.python.org/packages/source/a/aiohttp/aiohttp-{version}.tar.gz"
     name = "aiohttp"
     depends = ["setuptools"]
@@ -16,14 +16,13 @@ class AIOHTTPRecipe(CppCompiledComponentsPythonRecipe):  # type: ignore # pylint
         return env
 
     python_depends = [
-        'aiohappyeyeballs >= 2.3.0',
-        'aiosignal >=1.1.2,<1.4',
-        'async-timeout >= 4.0, <6.0 ; python_version<"3.11"',
-        'attrs >= 17.3.0',
-        'frozenlist >= 1.1.1',
-        'multidict >=4.5, < 7.0',
-        'propcache >= 0.2.0',
-        'yarl >= 1.17.0, < 2.0',
+        'aiohappyeyeballs >= 2.5.0',
+        'aiosignal >=1.4,<1.5',
+        'async-timeout >=4.0,<6.0 ; python_version<"3.11"',
+        'frozenlist >=1.1.1',
+        'multidict >=4.5,<7.0',
+        'propcache >=0.2.0',
+        'yarl >=1.17.0,<2.0',
     ]
 
 

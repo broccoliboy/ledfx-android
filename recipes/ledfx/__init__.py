@@ -23,7 +23,8 @@ class LedFxRecipe(PyProjectRecipe):
         'samplerate',
         'requests',
         'netifaces',
-        'uvloop'
+        'uvloop',
+        'vnoise'
     ]
     
     python_depends = [
@@ -40,7 +41,6 @@ class LedFxRecipe(PyProjectRecipe):
         'icmplib>=3.0.4,<4',
         'certifi>=2025.4.26,<2026',
         'python-dotenv>=1.1.0,<2',
-        'vnoise>=0.1.0,<1',
         'webcolors>=24,<25',
         'packaging>=21,<22'
     ]

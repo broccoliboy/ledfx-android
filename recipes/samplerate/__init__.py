@@ -5,7 +5,7 @@ class SamplerateRecipe(PyProjectRecipe):
     version = 'v0.2.1'
     url = 'git+https://github.com/tuxu/python-samplerate'
     
-    depends = ['setuptools']
+    depends = ['setuptools', 'numpy']
     
     def get_recipe_env(self, arch, **kwargs):
         env = super().get_recipe_env(arch, **kwargs)

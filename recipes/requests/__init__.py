@@ -3,7 +3,7 @@ from pythonforandroid.recipe import PythonRecipe, PyProjectRecipe
 
 class RequestsRecipe(PyProjectRecipe):
     name = 'requests'
-    version = 'v2.32.3'
+    version = 'v2.32.5'
     url = 'https://github.com/psf/requests/archive/{version}.tar.gz'
     depends = ['setuptools']
 
