@@ -1,5 +1,5 @@
 """Build AIOHTTP"""
-from pythonforandroid.recipe import CppCompiledComponentsPythonRecipe, CythonRecipe
+from pythonforandroid.recipe import CppCompiledComponentsPythonRecipe
 
 
 class AIOHTTPRecipe(CppCompiledComponentsPythonRecipe):  # type: ignore # pylint: disable=R0903
