@@ -23,7 +23,6 @@ class LedFxRecipe(PyProjectRecipe):
         'samplerate',
         'requests',
         'netifaces',
-        'uvloop',
         'vnoise'
     ]
     
