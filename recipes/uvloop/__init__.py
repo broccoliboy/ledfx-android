@@ -1,3 +1,5 @@
+# Currently broken because uvloop depends on cython 3 but python-for-android uses cython 0.29
+
 from pythonforandroid.recipe import PyProjectRecipe
 
 
