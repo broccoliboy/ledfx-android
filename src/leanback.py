@@ -152,14 +152,5 @@ def serve():
         return web.Response(text=html, content_type='text/html')
 
     app = web.Application()
-    app.router.add_get('/', handle_root)
-
-    runner = web.AppRunner(app)
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(runner.setup())
-
-    site = web.TCPSite(runner, '0.0.0.0', WEBVIEW_PORT)
-    loop.run_until_complete(site.start())
-
-    print(f'Serving static HTML site on port {WEBVIEW_PORT}')
-    loop.run_forever()
+    app.add_routes([web.get('/', handle_root)])
+    web.run_app(app, host='0.0.0.0', port=WEBVIEW_PORT)
