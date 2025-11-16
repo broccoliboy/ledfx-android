@@ -16,7 +16,7 @@ class LedFxRecipe(PyProjectRecipe):
     depends = [
         'numpy',
         'aiohttp',
-        'aubio',
+        'aubio-ledfx',
         'zeroconf',
         'pybase64',
         'pillow',
@@ -41,7 +41,8 @@ class LedFxRecipe(PyProjectRecipe):
         'certifi>=2025.4.26,<2026',
         'python-dotenv>=1.1.0,<2',
         'webcolors>=24,<25',
-        'packaging>=21,<22'
+        'packaging>=21,<22',
+        'xled>=0.7.0,<0.8'
     ]
 
 
