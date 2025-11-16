@@ -12,7 +12,6 @@ from jnius import autoclass
 from PIL import Image
 
 from ports import LEDFX_PORT_LEANBACK, WEBVIEW_PORT
-import asyncio
 from aiohttp import web
 
 
