@@ -14,6 +14,7 @@ class AndroidAudioRecord:
     name = 'Microphone'
     hostapi = 'Android AudioRecord API'
     channels = 1
+    sampling_rate = 44100  # Standard sample rate
 
     def __init__(self, session_id=0, capture_size=None):
         """
@@ -21,7 +22,6 @@ class AndroidAudioRecord:
         """
         self.session_id = session_id
         self.capture_size = capture_size
-        self.sampling_rate = 44100  # Standard sample rate
         self._waveform = None
         self.recorder = None
         
@@ -35,14 +35,14 @@ class AndroidAudioRecord:
         """
         Configure native Android AudioRecord and start capture
         """
-        NativeAudioRecord = autoclass('android.media.AudioRecord')
+        AudioRecord = autoclass('android.media.AudioRecord')
         AudioFormat = autoclass('android.media.AudioFormat')
         AudioSource = autoclass('android.media.MediaRecorder$AudioSource')
 
         # Set parameters
         audio_format = AudioFormat.ENCODING_PCM_8BIT
         channels = AudioFormat.CHANNEL_IN_MONO
-        self.buffer_size = NativeAudioRecord.getMinBufferSize(
+        self.buffer_size = AudioRecord.getMinBufferSize(
             self.sampling_rate,
             channels,
             audio_format
@@ -53,8 +53,8 @@ class AndroidAudioRecord:
         logger.debug(f'Using AudioRecord buffer size: {self.buffer_size}')
 
         # Create AudioRecord instance
-        self.recorder = NativeAudioRecord(
-            AudioSource.MIC,
+        self.recorder = AudioRecord(
+            AudioSource.UNPROCESSED,
             self.sampling_rate,
             channels,
             audio_format,
