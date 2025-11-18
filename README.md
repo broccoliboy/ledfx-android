@@ -65,7 +65,6 @@ This repo includes a Github Action that will build an apk and trigger a new rele
 ## Future work
 
 - Support config file import/export. Currently doesn't work in Android webview.
-- Support microphone input
 - Improve LedFx Leanback Mode to allow more controls, like triggering LedFx Scenes or setting effects on known devices
 - Automatic detection of music/audio playing using [Android Visualizer peak/RMS measurement mode](https://developer.android.com/reference/android/media/audiofx/Visualizer#getMeasurementPeakRms(android.media.audiofx.Visualizer.MeasurementPeakRms)) to enable/disable LedFx effects
 
