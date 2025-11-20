@@ -20,7 +20,7 @@ class LedFxRecipe(PyProjectRecipe):
         'zeroconf',
         'pybase64',
         'pillow',
-        'samplerate',
+        'samplerate-ledfx',
         'requests',
         'netifaces',
         'vnoise'
