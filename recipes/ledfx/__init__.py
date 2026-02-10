@@ -41,7 +41,9 @@ class LedFxRecipe(PyProjectRecipe):
         'certifi>=2025.4.26,<2026',
         'python-dotenv>=1.1.0,<2',
         'webcolors>=24,<25',
-        'packaging>=21,<22'
+        'packaging>=21,<22',
+        'xled>=0.7.0',
+        'lifx-async>=5.1.0'
     ]
 
 
