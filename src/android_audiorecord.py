@@ -1,4 +1,4 @@
-# Wrapper for the [Android Visualizer API](https://developer.android.com/reference/android/media/audiofx/Visualizer)
+# Wrapper for the [Android AudioRecord API](https://developer.android.com/reference/android/media/AudioRecord)
 
 import logging
 from jnius import autoclass
