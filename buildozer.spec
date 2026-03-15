@@ -49,10 +49,10 @@ version.regex = PROJECT_VERSION = ['"](.*)['"]
 version.filename = %(requirements.source.ledfx)s/ledfx/consts.py
 
 # (str) Presplash of the application
-presplash.filename = src/res/banner.png
+presplash.filename = src/res/presplash.png
 
 # (str) Icon of the application
-icon.filename =  src/res/tray.png
+icon.filename =  src/res/icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
