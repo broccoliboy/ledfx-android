@@ -8,8 +8,7 @@ build_root = root / '.buildozer'
 
 modules = [
     'ledfx',
-    # 'samplerate',
-    # 'aubio'
+    'samplerate-ledfx',
 ]
 
 for module in modules:
@@ -23,5 +22,6 @@ for module in modules:
     ]
 
     for p in patterns:
+        print('Cleaning', p)
         for d in build_root.rglob(p):
             shutil.rmtree(d, ignore_errors=True)
