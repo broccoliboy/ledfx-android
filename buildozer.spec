@@ -49,14 +49,14 @@ version.regex = PROJECT_VERSION = ['"](.*)['"]
 version.filename = %(requirements.source.ledfx)s/ledfx/consts.py
 
 # (str) Presplash of the application
-presplash.filename = %(requirements.source.ledfx)s/ledfx_assets/banner.png
+presplash.filename = src/res/banner.png
 
 # (str) Icon of the application
-icon.filename =  %(requirements.source.ledfx)s/ledfx_assets/tray.png
+icon.filename =  src/res/tray.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
-orientation = landscape,portrait
+orientation = all
 
 # (list) List of services to declare
 # This is currently only relevant to Android services.
@@ -207,7 +207,7 @@ android.accept_sdk_license = True
 # 3) A directory, here 'legal_resources' must contain one or more directories, 
 # each of a resource kind:  drawable, xml, etc...
 # android.add_resources = legal_resources
-#android.add_resources = 
+android.add_resources = src/res
 
 # (list) Gradle dependencies to add
 #android.gradle_dependencies =
