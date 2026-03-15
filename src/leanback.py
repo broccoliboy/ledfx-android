@@ -54,9 +54,6 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             display: block;
             margin: 0 auto;
         }
-        .button-container {
-            margin: 30px;
-        }
         .navigate-button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -84,11 +81,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div class="image-container">
         <img src="{{qr_src}}">
     </div>
-    <div class="button-container">
-        <div class="button-row">
-            <a href="{{ledfx_local_address}}" class="navigate-button">Open LedFx UI</a>
-            <button id="exit-btn" class="navigate-button" style="background-color:#dc3545;">Shutdown</button>
-        </div>
+    <div class="button-row">
+        <a href="{{ledfx_local_address}}" class="navigate-button">Open LedFx UI</a>
+        <button id="exit-btn" class="navigate-button" style="background-color:#dc3545;">Shutdown</button>
     </div>
     <script>
     document.getElementById('exit-btn').onclick = function() {
