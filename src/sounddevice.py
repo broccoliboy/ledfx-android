@@ -124,13 +124,13 @@ class InputStream(Thread):
                 with self.device(capture_size=self.blocksize) as dev:
                     
                     if self.samplerate is not None and dev.sampling_rate != self.samplerate:
-                        logger.error(f'Unsupported sampling rate {self.samplerate} requested from {type(dev).__name__}. Actual sample rate is {dev.sampling_rate}')
+                        logger.warning(f'Unsupported sampling rate {self.samplerate} requested from {type(dev).__name__}. Actual sample rate is {dev.sampling_rate}')
                     
                     # use temporary buffer if the requested blocksize is larger than the Android Visualizer's capture size
                     need_buffer = dev.capture_size < self.blocksize
                     
                     if need_buffer:
-                        logger.debug(f'Unsupported blocksize {self.blocksize} requested from {type(dev).__name__}. Actual capture size is {dev.capture_size}. Using temporary buffer of size { self.blocksize} to transfer data.')
+                        logger.warning(f'Unsupported blocksize {self.blocksize} requested from {type(dev).__name__}. Actual capture size is {dev.capture_size}. Using temporary buffer of size { self.blocksize} to transfer data.')
                         # make a buffer that's big enough to hold the requested blocksize or the Android Visualizer's capture size, whichever is larger
                         buffer = np.zeros(self.blocksize, dtype=self.dtype)
                     
@@ -159,6 +159,6 @@ class InputStream(Thread):
                         time.sleep(min(1, max(0, 1/self.capture_rate - (time.time() - last_run))))
 
             except Exception as e:
-                logger.error('Error in visualizer capture/update loop. Attempting to restart Android Visualizer')
+                logger.error('Error in audio capture/update loop. Attempting to restart input device.')
                 logger.error(e)
                 time.sleep(1)

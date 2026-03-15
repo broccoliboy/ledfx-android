@@ -1,5 +1,6 @@
 # Wrapper for the [Android AudioRecord API](https://developer.android.com/reference/android/media/AudioRecord)
 
+import time
 import logging
 from jnius import autoclass
 
@@ -69,13 +70,19 @@ class AndroidAudioRecord:
         """
         Stop and release native Android AudioRecord
         """
-        try:
-            self.recorder.stop()
-            self.recorder.release()
-        except Exception as e:
-            logger.debug(f'Error stopping AudioRecord: {e}')
-        self.recorder = None
-        logger.debug('AudioRecord stopped')
+        if self.recorder is not None:
+            try:
+                self.recorder.stop()
+            except Exception as e:
+                logger.warning(f'Error stopping AudioRecord: {e}')
+            try:
+                self.recorder.release()
+                time.sleep(0.5)  # seems to improve stability to wait for a bit after releasing
+            except Exception as e:
+                logger.warning(f'Error releasing AudioRecord: {e}')
+            self.recorder = None
+            self._waveform = None
+            logger.debug('AudioRecord stopped')
     
     @property
     def waveform(self):

@@ -1,5 +1,6 @@
 # Wrapper for the [Android Visualizer API](https://developer.android.com/reference/android/media/audiofx/Visualizer)
 
+import time
 import logging
 from jnius import autoclass, PythonJavaClass, java_method
 
@@ -14,12 +15,12 @@ class AndroidVisualizer:
     name = 'Stereo Mix'
     hostapi = 'Android Visualizer API'
     channels = 1
+    session_id = 0  # default audio session ID for capturing output audio (stereo mix)
 
-    def __init__(self, session_id=0, capture_size=None):
+    def __init__(self, capture_size=None):
         """
         Initialize
         """
-        self.session_id = session_id
         self.capture_size = capture_size
         self.sampling_rate = 0
         self.vis = None
@@ -36,6 +37,7 @@ class AndroidVisualizer:
         """
         Configure native Android Visualizer and start capture
         """
+        
         NativeAndroidVisualizer = autoclass('android.media.audiofx.Visualizer')
 
         # create native Android Visualizer object on the chosen session ID. Default session id is 0 (stereo mix)
@@ -55,8 +57,8 @@ class AndroidVisualizer:
         try:
             self.vis.setCaptureSize(self.capture_size or default_capture_size)
         except Exception as e:
-            logger.debug(f'Error setting capture size {self.capture_size}: {e}')
-            logger.debug('Falling back to default or max capture size')
+            logger.warning(f'Error setting capture size {self.capture_size}: {e}')
+            logger.warning('Falling back to default or max capture size')
             self.vis.setCaptureSize(default_capture_size)
         
         self.capture_size = self.vis.getCaptureSize()
@@ -102,13 +104,20 @@ class AndroidVisualizer:
         """
         Disable and release native Android Visualizer
         """
-        try:
-            self.vis.setEnabled(False)
-            self.vis.release()
-        except:
-            pass
-        self.vis = None
-        logger.debug('Visualizer disabled')
+        if self.vis is not None:
+            try:
+                self.vis.setEnabled(False)
+            except Exception as e:
+                logger.warning(f'Error disabling visualizer: {e}')
+            try:
+                self.vis.release()
+                time.sleep(0.5)  # seems to improve stability to wait for a bit after releasing
+            except Exception as e:
+                logger.warning(f'Error releasing visualizer: {e}')
+            self.vis = None
+            self._waveform = None
+            self._fft = None
+            logger.debug('Visualizer disabled')
     
     @property
     def waveform(self):
