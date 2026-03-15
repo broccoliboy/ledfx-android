@@ -7,6 +7,7 @@ import os
 import sys
 
 from android.storage import app_storage_path
+from jnius import autoclass
 
 from leanback import is_leanback
 from ports import LEDFX_PORT_LEANBACK, WEBVIEW_PORT
@@ -31,4 +32,21 @@ def start_ledfx():
         '--offline',
     ]
     
-    ledfx_main()
+    try:
+        ledfx_main()
+        print('LedFX process exited cleanly. Signaling main activity to exit...')
+        signal_main_activity_to_exit()
+    except Exception as e:
+        print('LedFX encountered an error. Service will restart automatically...')
+
+
+def signal_main_activity_to_exit():
+    """Send a broadcast intent to signal the main activity to exit."""
+    try:
+        Intent = autoclass('android.content.Intent')
+        PythonService = autoclass('org.kivy.android.PythonService')
+        service = PythonService.mService
+        intent = Intent('com.ledfx.EXIT_APP')
+        service.sendBroadcast(intent)
+    except Exception as e:
+        logging.getLogger('ledfx-android').exception('Failed to signal main activity to exit: %s', e)

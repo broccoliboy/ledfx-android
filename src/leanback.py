@@ -71,6 +71,11 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         .navigate-button:hover {
             background-color: #0056b3;
         }
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -80,8 +85,28 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <img src="{{qr_src}}">
     </div>
     <div class="button-container">
-        <a href="{{ledfx_local_address}}" class="navigate-button">Open LedFx UI</a>
+        <div class="button-row">
+            <a href="{{ledfx_local_address}}" class="navigate-button">Open LedFx UI</a>
+            <button id="exit-btn" class="navigate-button" style="background-color:#dc3545;">Shutdown</button>
+        </div>
     </div>
+    <script>
+    document.getElementById('exit-btn').onclick = function() {
+        fetch('{{ledfx_local_address}}/api/power', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({action: 'shutdown'})
+        }).then(response => {
+            if (response.ok) {
+                alert('Shutting down...');
+            } else {
+                alert('Failed to shutdown: ' + response.status);
+            }
+        }).catch(err => {
+            alert('Error: ' + err);
+        });
+    };
+    </script>
 </body>
 </html>
 """
@@ -151,5 +176,7 @@ def serve():
         return web.Response(text=html, content_type='text/html')
 
     app = web.Application()
-    app.add_routes([web.get('/', handle_root)])
+    app.add_routes([
+        web.get('/', handle_root),
+    ])
     web.run_app(app, host='0.0.0.0', port=WEBVIEW_PORT)
