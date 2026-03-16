@@ -9,7 +9,6 @@ import os
 import socket
 
 import qrcode
-from jnius import autoclass
 from PIL import Image
 
 from ports import LEDFX_PORT_LEANBACK, WEBVIEW_PORT
@@ -18,6 +17,8 @@ from aiohttp import web
 
 @cache
 def is_leanback():
+    from jnius import autoclass
+
     # Determine if we're running on Android TV
     ctx = autoclass('org.kivy.android.PythonService').mService
     if not ctx:
@@ -175,3 +176,7 @@ def serve():
         web.get('/', handle_root),
     ])
     web.run_app(app, host='0.0.0.0', port=WEBVIEW_PORT)
+
+
+if __name__ == '__main__':
+    serve()
