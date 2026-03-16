@@ -3,6 +3,7 @@
 
 import base64
 from functools import cache
+from importlib import resources
 from io import BytesIO
 import os
 import socket
@@ -117,7 +118,7 @@ def create_qr_with_logo(data, logo_path):
     qr.add_data(data)
     qr.make(fit=True)
 
-    qr_img = qr.make_image(fill_color="black", back_color="white").convert('RGB')
+    qr_img = qr.make_image(fill_color='black', back_color='white').convert('RGB')
 
     if os.path.exists(logo_path):
         logo = Image.open(logo_path)
@@ -145,9 +146,8 @@ def get_html():
         ledfx_lan_address = None
 
     if ledfx_lan_address:
-        from ledfx_frontend import where
-        logo_path = os.path.join(where(), 'icon.png')
-        qr_img = create_qr_with_logo(ledfx_lan_address, logo_path)
+        with resources.path('res', 'icon.png') as logo_path:
+            qr_img = create_qr_with_logo(ledfx_lan_address, logo_path)
         buffer = BytesIO()
         qr_img.save(buffer, format='png')
         buffer.seek(0)
