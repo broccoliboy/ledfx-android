@@ -14,5 +14,7 @@ buildozer = { git = "https://github.com/kivy/buildozer", rev = "91ce81b" }
 
 [dependency-groups]
 dev = [
+    "aiohttp>=3.13.3",
     "pillow>=12.1.1",
+    "qrcode>=8.2",
 ]
